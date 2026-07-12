@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Tito
+providerId: tito
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Registration
+- Events
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Tito spend. Tito's cost model is a per-ticket fee on paid
+  events rather than a subscription: 3% per ticket on the standard rate (2.5%
+  for approved charity, non-profit, and community organizations), with the
+  per-ticket fee capped at 25 EUR per ticket. Free events incur no Tito fee, and
+  there is no setup fee, monthly subscription, or premium-feature surcharge.
+  Payment-processing fees (for example Stripe at roughly 2.9% + 30 cents in the
+  US or 1.4% + 0.25 EUR in Europe) are charged separately by the payment
+  gateway, not by Tito, and should be tracked as a distinct line item. The Admin
+  API adds no incremental cost - spend scales with paid tickets sold, so cost is
+  effectively a variable, revenue-linked cost of sales.
+notes: >-
+  Per-unit rates reflect Tito's public pricing page at the review date and are
+  not reconciled against an invoice. Verify the per-ticket percentage, the
+  charity rate, and the 25 EUR cap on https://ti.to/pricing, and confirm your
+  payment processor's rates separately.
+sources:
+- https://ti.to/pricing
+- https://ti.to
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Tito
+serviceCategory: Event Ticketing and Registration
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per Transaction
+  billingCurrency: EUR
+  chargeCategories:
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: Tito
+  ServiceCategory: Event Ticketing and Registration
+  ProviderName: Tito
+  PublisherName: Tito
+  InvoiceIssuerName: Team Tito Limited
+  BillingCurrency: EUR
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: paid_ticket_fee
+  description: Per-ticket fee on paid tickets (3% standard, 2.5% charity/non-profit), capped at 25 EUR per ticket.
+  unit: tickets
+  aggregation: sum
+  dimensions:
+  - account
+  - event
+  - release
+- name: refunded_tickets
+  description: Tickets refunded; relevant to reconciling net Tito fees against gross ticket sales.
+  unit: tickets
+  aggregation: sum
+  dimensions:
+  - account
+  - event
+- name: payment_processing_fee
+  description: Gateway processing fee (e.g. Stripe), charged separately by the processor, not by Tito.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - event
+  - processor
+principles:
+- name: Visibility
+  description: Track per-ticket Tito fees per event and release, and separately track payment-processor fees so total cost of ticketing is visible.
+- name: Allocation
+  description: Map ticket fees to the specific event, account, and release so cost is allocated to the program or business unit running the event.
+- name: Optimization
+  description: For high-priced tickets, model the 25 EUR per-ticket cap; apply for the charity/non-profit rate if eligible; run genuinely free events at no Tito cost.
+- name: Accountability
+  description: Assign an owner per event to reconcile Tito fees plus processor fees against gross ticket revenue each cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

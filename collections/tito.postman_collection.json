@@ -1,0 +1,465 @@
+{
+  "info": {
+    "name": "Tito Admin API",
+    "description": "REST/JSON interface for managing Tito events, releases, tickets, registrations, discount codes, activities, check-in lists, refunds, and webhook endpoints. Base URL: https://api.tito.io/v3. Authenticate with a secret API token (from https://id.tito.io/api-access-tokens) sent as 'Authorization: Token token=YOUR-API-TOKEN' plus 'Accept: application/json'. Paths and methods are grounded in the Tito Admin API v3.0 docs; request bodies are modeled examples.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "in", "value": "header", "type": "string" },
+      { "key": "key", "value": "Authorization", "type": "string" },
+      { "key": "value", "value": "Token token={{apiToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.tito.io/v3", "type": "string" },
+    { "key": "apiToken", "value": "", "type": "string" },
+    { "key": "account_slug", "value": "", "type": "string" },
+    { "key": "event_slug", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Account",
+      "item": [
+        {
+          "name": "Confirm authentication",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/hello", "host": ["{{baseUrl}}"], "path": ["hello"] },
+            "description": "Confirms the API token is valid and lists accessible accounts."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Get all upcoming events",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/events", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "events"] }
+          }
+        },
+        {
+          "name": "Get all past events",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/events/past", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "events", "past"] }
+          }
+        },
+        {
+          "name": "Get all archived events",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/events/archived", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "events", "archived"] }
+          }
+        },
+        {
+          "name": "Get an event",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}"] }
+          }
+        },
+        {
+          "name": "Create an event",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"event\": {\n    \"title\": \"Awesome Conf\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/events", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "events"] }
+          }
+        },
+        {
+          "name": "Update an event",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"event\": {\n    \"location\": \"Dublin, Ireland\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}"] }
+          }
+        },
+        {
+          "name": "Delete an event",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}"] }
+          }
+        },
+        {
+          "name": "Duplicate an event",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/duplication", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "duplication"] }
+          }
+        },
+        {
+          "name": "Get event duplication status",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/duplication", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "duplication"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Releases",
+      "item": [
+        {
+          "name": "Get all releases",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases"] }
+          }
+        },
+        {
+          "name": "Get a release",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases/:release_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases", ":release_slug"], "variable": [{ "key": "release_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Create a release",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"release\": {\n    \"title\": \"Early Bird\",\n    \"price\": \"99.00\",\n    \"quantity\": 100\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases"] }
+          }
+        },
+        {
+          "name": "Update a release",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"release\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases/:release_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases", ":release_slug"], "variable": [{ "key": "release_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Delete a release",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases/:release_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases", ":release_slug"], "variable": [{ "key": "release_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Put a release on sale (activation)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases/:release_slug/activation", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases", ":release_slug", "activation"], "variable": [{ "key": "release_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Pause a release (deactivation)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/releases/:release_slug/deactivation", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "releases", ":release_slug", "deactivation"], "variable": [{ "key": "release_slug", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tickets",
+      "item": [
+        {
+          "name": "Get all tickets",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets?page[size]=100", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets"], "query": [{ "key": "page[size]", "value": "100" }] }
+          }
+        },
+        {
+          "name": "Get a ticket",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets/:ticket_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets", ":ticket_slug"], "variable": [{ "key": "ticket_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Create a ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"ticket\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets"] }
+          }
+        },
+        {
+          "name": "Update a ticket",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"ticket\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets/:ticket_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets", ":ticket_slug"], "variable": [{ "key": "ticket_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Reassign a ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"reassignment\": {\n    \"email\": \"new@example.com\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets/:ticket_slug/reassignments", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets", ":ticket_slug", "reassignments"], "variable": [{ "key": "ticket_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Void a ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/tickets/:ticket_slug/void", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "tickets", ":ticket_slug", "void"], "variable": [{ "key": "ticket_slug", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Registrations",
+      "item": [
+        {
+          "name": "Get all registrations",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/registrations", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "registrations"] }
+          }
+        },
+        {
+          "name": "Get a registration",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/registrations/:registration_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "registrations", ":registration_slug"], "variable": [{ "key": "registration_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Create a registration",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"registration\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/registrations", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "registrations"] }
+          }
+        },
+        {
+          "name": "Mark a registration as paid",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/registrations/:registration_slug/confirmations", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "registrations", ":registration_slug", "confirmations"], "variable": [{ "key": "registration_slug", "value": "" }] }
+          }
+        },
+        {
+          "name": "Mark a registration as unpaid",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/registrations/:registration_slug/confirmations", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "registrations", ":registration_slug", "confirmations"], "variable": [{ "key": "registration_slug", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Discount Codes",
+      "item": [
+        {
+          "name": "Get all discount codes",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/discount_codes", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "discount_codes"] }
+          }
+        },
+        {
+          "name": "Create a discount code",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"discount_code\": {\n    \"code\": \"EARLY10\",\n    \"type\": \"percent\",\n    \"value\": 10\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/discount_codes", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "discount_codes"] }
+          }
+        },
+        {
+          "name": "Get a discount code",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/discount_codes/:discount_code_id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "discount_codes", ":discount_code_id"], "variable": [{ "key": "discount_code_id", "value": "" }] }
+          }
+        },
+        {
+          "name": "Update a discount code",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"discount_code\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/discount_codes/:discount_code_id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "discount_codes", ":discount_code_id"], "variable": [{ "key": "discount_code_id", "value": "" }] }
+          }
+        },
+        {
+          "name": "Delete a discount code",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/discount_codes/:discount_code_id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "discount_codes", ":discount_code_id"], "variable": [{ "key": "discount_code_id", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Activities",
+      "item": [
+        {
+          "name": "Get all activities",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/activities", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "activities"] }
+          }
+        },
+        {
+          "name": "Create an activity",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"activity\": {\n    \"name\": \"Workshop\",\n    \"capacity\": 50,\n    \"release_ids\": []\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/activities", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "activities"] }
+          }
+        },
+        {
+          "name": "Get an activity",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/activities/:activity_id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "activities", ":activity_id"], "variable": [{ "key": "activity_id", "value": "" }] }
+          }
+        },
+        {
+          "name": "Duplicate an activity",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/activities/:activity_id/duplication", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "activities", ":activity_id", "duplication"], "variable": [{ "key": "activity_id", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Check-in Lists",
+      "item": [
+        {
+          "name": "Get all check-in lists",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/checkin_lists", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "checkin_lists"] }
+          }
+        },
+        {
+          "name": "Create a check-in list",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"checkin_list\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/checkin_lists", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "checkin_lists"] }
+          }
+        },
+        {
+          "name": "Get a check-in list",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/checkin_lists/:checkin_list_slug", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "checkin_lists", ":checkin_list_slug"], "variable": [{ "key": "checkin_list_slug", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Refunds",
+      "item": [
+        {
+          "name": "Get all refunds",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/refunds", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "refunds"] }
+          }
+        },
+        {
+          "name": "Get a refund",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/refunds/:refund_id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "refunds", ":refund_id"], "variable": [{ "key": "refund_id", "value": "" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Webhook Endpoints",
+      "item": [
+        {
+          "name": "Get all webhook endpoints",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/webhook_endpoints", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "webhook_endpoints"] }
+          }
+        },
+        {
+          "name": "Create a webhook endpoint",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"webhook_endpoint\": {\n    \"url\": \"https://example.com/tito-webhook\",\n    \"included_triggers\": [\"ticket.completed\", \"registration.finished\"]\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/webhook_endpoints", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "webhook_endpoints"] }
+          }
+        },
+        {
+          "name": "Get a webhook endpoint",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/webhook_endpoints/:id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "webhook_endpoints", ":id"], "variable": [{ "key": "id", "value": "" }] }
+          }
+        },
+        {
+          "name": "Update a webhook endpoint",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Accept", "value": "application/json" }, { "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"webhook_endpoint\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/webhook_endpoints/:id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "webhook_endpoints", ":id"], "variable": [{ "key": "id", "value": "" }] }
+          }
+        },
+        {
+          "name": "Delete a webhook endpoint",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/{{account_slug}}/{{event_slug}}/webhook_endpoints/:id", "host": ["{{baseUrl}}"], "path": ["{{account_slug}}", "{{event_slug}}", "webhook_endpoints", ":id"], "variable": [{ "key": "id", "value": "" }] }
+          }
+        }
+      ]
+    }
+  ]
+}

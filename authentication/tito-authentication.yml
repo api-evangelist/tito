@@ -1,0 +1,27 @@
+generated: '2026-07-12'
+method: documented
+source: openapi/tito-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: titoToken
+  type: apiKey
+  in: header
+  parameterName: Authorization
+  format: 'Token token=YOUR-API-TOKEN'
+  description: >-
+    The Tito Admin API authenticates with a secret API token. Generate a token
+    by signing in at https://id.tito.io (api-access-tokens) and selecting
+    "Generate New Token". Only secret token types are valid for the private
+    Admin API, and each token is scoped to a live or test mode (test tokens
+    read and write only test data). The token is sent in the Authorization
+    header as "Token token=YOUR-API-TOKEN", and every request must also send
+    "Accept: application/json". A compromised token can be revoked and
+    regenerated at https://id.tito.io/api-access-tokens. The GET /hello endpoint
+    confirms a token is valid and lists the accounts it can access. Note the
+    separate Tito Check-in API (https://checkin.tito.io) is unauthenticated and
+    instead scopes access by including a Check-in List slug in the URL.
+  sources:
+  - https://ti.to/docs/api/admin/3.0
+  - openapi/tito-openapi.yml

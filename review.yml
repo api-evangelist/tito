@@ -1,0 +1,165 @@
+aid: tito
+name: Tito
+review:
+  question: Does Tito expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Tito's public API surface is
+    request/response REST over HTTPS (the Admin API at
+    https://api.tito.io/v3 and the unauthenticated Check-in API at
+    https://checkin.tito.io). Tito's event-driven surface is delivered as
+    outbound webhooks - Tito POSTs a JSON payload to endpoints you register -
+    which is server-to-endpoint HTTP, not a WebSocket, SSE, or other
+    subscription transport hosted on Tito's own API. There is no server-push
+    channel on Tito's own API to model, so no AsyncAPI document was created.
+findings:
+  summary: |
+    Tito does not publish a documented public WebSocket API. Tito is an event
+    registration and ticketing platform. Its Admin API is a REST/JSON API with
+    base URL https://api.tito.io/v3, authenticated by a secret API token passed
+    as `Authorization: Token token=YOUR-API-TOKEN` together with an
+    `Accept: application/json` header. Resources (events, releases, tickets,
+    registrations, discount codes, activities, check-in lists, refunds, webhook
+    endpoints) are addressed by account_slug and event_slug and all use standard
+    REST verbs. Tito's real-time delivery is via outbound webhooks (HTTP POST to
+    a registered endpoint) for triggers such as ticket.created, ticket.completed,
+    registration.finished, registration.completed, registration.cancelled,
+    checkin.created, and interested_user.*. A separate Check-in API
+    (https://checkin.tito.io) is unauthenticated and takes a Check-in List slug
+    in the URL. No realtime, bidirectional, or streaming WebSocket (ws:// or
+    wss://) endpoint is documented anywhere in Tito's Admin API, Check-in API,
+    Checkout API, or widget documentation as of the review date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.tito.io/v3
+      documented: true
+      note: Admin API. REST/JSON, secret API token via Authorization Token header.
+    - protocol: REST
+      scheme: https
+      baseURL: https://checkin.tito.io
+      documented: true
+      note: Check-in API. Unauthenticated; each request includes the Check-in List slug in the URL.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Tito POSTs JSON payloads to endpoints registered via the Webhook Endpoints API. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Tito's Admin API, Check-in API, Checkout API, widget, or changelog as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.tito.io/v3/hello
+    - GET    https://api.tito.io/v3/:account_slug/events
+    - GET    https://api.tito.io/v3/:account_slug/events/past
+    - GET    https://api.tito.io/v3/:account_slug/events/archived
+    - POST   https://api.tito.io/v3/:account_slug/events
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/duplication
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/duplication
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/releases
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/releases
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/archival
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/archival
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/duplication
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/activation
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/deactivation
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/publication
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/publication
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/tickets
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/tickets
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/reassignments
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/void
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/registrations
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/registrations
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/discount_codes
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/discount_codes
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/activities
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/activities
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id/duplication
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists/:checkin_list_slug
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists/:checkin_list_slug
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists/:checkin_list_slug
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/refunds
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/refunds/:refund_id
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints
+    - GET    https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id
+    - POST   https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints
+    - PATCH  https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id
+    - DELETE https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id
+  endpointsModeled:
+    - note: |
+        All paths, HTTP methods, and authentication above are confirmed from
+        Tito's official Admin API v3.0 documentation. What is MODELED (not
+        copied verbatim from a machine-readable Tito spec, because Tito does not
+        publish OpenAPI) is the request/response JSON body SCHEMAS in
+        openapi/tito-openapi.yml - attribute names for events, releases,
+        tickets, registrations, discount codes, activities, check-in lists,
+        refunds, and webhook endpoints are drawn from the documented attribute
+        tables and example payloads but are represented as a lightweight,
+        loosely-typed schema. Treat field-level schemas as a reasonable model,
+        not an exhaustive contract.
+  webhookTriggersConfirmed:
+    - checkin.created
+    - ticket.created
+    - ticket.completed
+    - ticket.reassigned
+    - ticket.updated
+    - ticket.unsnoozed
+    - ticket.unvoided
+    - ticket.voided
+    - registration.updated
+    - registration.finished
+    - registration.completed
+    - registration.cancelled
+    - interested_user.created
+    - interested_user.updated
+    - interested_user.deleted
+sources:
+  - url: https://ti.to/docs/api
+    type: Documentation
+    note: API docs index listing the Admin API and Check-in API.
+  - url: https://ti.to/docs/api/admin/3.0
+    type: APIReference
+    note: Admin API v3.0. Base URL https://api.tito.io/v3; Authorization Token header; REST/JSON. No WebSocket mentioned.
+  - url: https://ti.to/docs/api/checkin
+    type: Documentation
+    note: Check-in API base https://checkin.tito.io; unauthenticated, Check-in List slug in URL. REST, not WebSocket.
+  - url: https://github.com/teamtito/api-docs
+    type: SourceCode
+    note: Source of the ti.to/docs API documentation; config.rb sets api_endpoint to https://api.tito.io/v3. No WebSocket endpoint anywhere.
+  - url: https://ti.to/pricing
+    type: Pricing
+    note: 3% per paid ticket (2.5% charity/nonprofit), free for free events, per-ticket fee capped at 25 EUR.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Tito's own public API is
+    request/response REST (Admin API and Check-in API) plus outbound webhooks.
+    No AsyncAPI document was created because there is no server-push transport
+    (WebSocket or SSE) hosted on Tito's own API to model; webhook delivery is
+    Tito POSTing to an endpoint you host and is documented in the OpenAPI and
+    apis.yml as a webhook integration rather than a subscription API.

@@ -1,0 +1,51 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Tito
+providerId: tito
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Rate Limiting
+- Quotas
+description: >-
+  Tito does not publish fixed numeric rate limits for the Admin API in its
+  public documentation. The documentation does define pagination behavior for
+  collection endpoints: results are returned in pages via the page[number] and
+  page[size] query parameters, with a default page size of 100 and a maximum
+  page size of 1000, and pagination metadata (current_page, next_page,
+  total_pages, total_count, per_page, overall_total) returned in a meta object.
+  Clients should paginate large result sets rather than attempting to pull all
+  records in a single request, and should handle throttling defensively.
+notes: >-
+  No per-account or per-endpoint request-rate ceiling is documented as of the
+  review date. Treat the 429 Too Many Requests handling below as standard
+  defensive guidance rather than a Tito-documented policy, and verify current
+  limits with Tito support if you operate at high volume.
+sources:
+- https://ti.to/docs/api/admin/3.0
+- https://github.com/teamtito/api-docs
+responseCodes:
+  throttled: 429
+limits:
+- name: Admin API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Admin API.
+- name: Collection Page Size
+  scope: request
+  metric: records
+  limit: 1000 max (default 100)
+  notes: Set via page[size]; use page[number] to paginate. Default page size is 100, maximum 1000.
+policies:
+- name: Pagination
+  description: Enumerating endpoints are paginated; iterate with page[number] and read next_page/total_pages from the meta object.
+- name: Backoff Strategy
+  description: On a 429 response, implement exponential backoff with jitter and honor any Retry-After header before retrying.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

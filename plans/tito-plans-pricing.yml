@@ -1,0 +1,105 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Tito
+providerId: tito
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Event Ticketing
+- Ticketing
+- Registration
+- Events
+- Plans
+description: >-
+  Tito charges no setup fee, no monthly subscription, and no extra fee for
+  premium features. Free events are free to run. For paid events, Tito takes a
+  per-ticket fee: 3% per ticket on the standard rate, or 2.5% for approved
+  charity, non-profit, and community organizations. The per-ticket fee is capped
+  at 25 EUR per ticket (for example, at the 3% rate a ticket priced above about
+  833.33 EUR incurs the flat 25 EUR cap instead). Payment-processing fees are
+  charged separately by the payment gateway (for example Stripe), not by Tito.
+  The Admin API itself carries no additional fee; it manages the same events and
+  tickets you would otherwise configure in the Tito dashboard.
+notes: >-
+  Rates reflect Tito's public pricing page at the review date and are not
+  reconciled against a signed order. Verify the current per-ticket percentage,
+  the charity/non-profit rate, and the 25 EUR cap on https://ti.to/pricing.
+  Payment processor rates (e.g. Stripe) are set by the processor and vary by
+  region.
+sources:
+- https://ti.to/pricing
+- https://ti.to
+plans:
+- id: tito-free-events
+  name: Free Events
+  type: free
+  description: >-
+    Running an event where all tickets are free costs nothing. No per-ticket
+    fee, no setup fee, and no monthly subscription.
+  entries:
+  - label: Free Ticket
+    name: free_ticket
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free
+    userMultiplied: false
+  elements:
+  - name: Hosted Event Pages
+  - name: Embeddable Widget
+  - name: Admin API Access
+  - name: Webhooks
+  - name: Check-in Apps
+- id: tito-standard
+  name: Standard (Paid Events)
+  type: usage
+  description: >-
+    Standard per-ticket pricing for paid events. Tito takes 3% per ticket, with
+    no setup fee, no monthly subscription, and no extra fee for premium
+    features. Payment processing is billed separately by your gateway.
+  entries:
+  - label: Per Paid Ticket
+    name: standard_per_ticket
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 3% per ticket (capped at 25 EUR per ticket)
+    userMultiplied: false
+  elements:
+  - name: Hosted Event Pages
+  - name: Embeddable Widget
+  - name: Admin API Access
+  - name: Webhooks
+  - name: Discount Codes
+  - name: Check-in Apps
+- id: tito-charity-nonprofit
+  name: Charity / Non-Profit / Community
+  type: usage
+  description: >-
+    Reduced per-ticket rate for approved charity, non-profit, and community
+    organizations. Requires an application to Tito.
+  entries:
+  - label: Per Paid Ticket (Reduced)
+    name: charity_per_ticket
+    type: usage
+    metric: tickets
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 2.5% per ticket (capped at 25 EUR per ticket); application required
+    userMultiplied: false
+  elements:
+  - name: All Standard Features
+  - name: Reduced Per-Ticket Rate
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

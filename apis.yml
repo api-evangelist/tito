@@ -1,0 +1,248 @@
+aid: tito
+url: https://raw.githubusercontent.com/api-evangelist/tito/refs/heads/main/apis.yml
+name: Tito
+kind: company
+description: Tito (ti.to) is an event registration and ticketing platform from Team
+  Tito in Dublin, Ireland, used to sell tickets, collect registrations, and check in
+  attendees for conferences and events. Organizers can sell through Tito-hosted event
+  pages or an embeddable widget. The Admin API is a REST/JSON interface at
+  https://api.tito.io/v3 for managing accounts, events, releases (ticket types),
+  tickets, registrations, discount codes, activities, check-in lists, and refunds,
+  authenticated with a secret API token. Tito also emits outbound webhooks for ticket,
+  registration, check-in, and interested-user events, and exposes a separate
+  unauthenticated Check-in API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Event Ticketing
+- Events
+- Registration
+- Ticketing
+- Conferences
+- Event Management
+- Attendees
+- Webhooks
+- SaaS
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: tito:tito-events-api
+  name: Tito Events API
+  tags:
+  - Events
+  - Event Management
+  - Conferences
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0
+    type: Documentation
+  - url: https://ti.to/docs/api/admin/3.0#events
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Create, list (upcoming, past, archived), retrieve, update, delete, and
+    duplicate Events under an Account. An Event is addressed by its account_slug and
+    event_slug and is the parent of releases, tickets, registrations, and most other
+    resources.
+- aid: tito:tito-releases-api
+  name: Tito Releases API
+  tags:
+  - Releases
+  - Ticket Types
+  - Inventory
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#releases
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Manage Releases - the ticket types sold for an Event. Create, retrieve,
+    update, delete, and duplicate releases, put them on sale or pause them
+    (activation/deactivation), archive/unarchive them, and toggle public/secret
+    visibility (publication).
+- aid: tito:tito-tickets-api
+  name: Tito Tickets API
+  tags:
+  - Tickets
+  - Attendees
+  - Ticketing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#tickets
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: List, filter (by state, type, release, activity, dates, and free-text
+    q), retrieve, create, and update Tickets, reassign a ticket to a different
+    attendee, and void or unvoid tickets. Each ticket belongs to an Event and a
+    Registration.
+- aid: tito:tito-registrations-api
+  name: Tito Registrations API
+  tags:
+  - Registrations
+  - Orders
+  - Attendees
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#registrations
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Manage Registrations - the orders that group one or more tickets. List,
+    filter, retrieve, create, and update registrations, and mark a registration as
+    paid or unpaid via the confirmations endpoint.
+- aid: tito:tito-discount-codes-api
+  name: Tito Discount Codes API
+  tags:
+  - Discount Codes
+  - Promotions
+  - Pricing
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#discount-codes
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Create, list, retrieve, update, and delete Discount Codes that apply
+    percentage or fixed discounts to an Event's releases at checkout.
+- aid: tito:tito-activities-api
+  name: Tito Activities API
+  tags:
+  - Activities
+  - Sessions
+  - Capacity
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#activities
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Manage Activities - capacity-bound sessions (for example workshops or
+    tracks) that releases can be attached to via release_ids. Create, list, retrieve,
+    update, delete, and duplicate activities.
+- aid: tito:tito-check-in-lists-api
+  name: Tito Check-in Lists API
+  tags:
+  - Check-in
+  - Attendees
+  - Access Control
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#check-in-lists
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Create, list, retrieve, update, and delete Check-in Lists for an Event.
+    Check-in Lists define which tickets can be checked in and are consumed at the
+    door by Tito's separate Check-in API and mobile/web check-in apps.
+- aid: tito:tito-refunds-api
+  name: Tito Refunds API
+  tags:
+  - Refunds
+  - Payments
+  - Finance
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#refunds
+    type: APIReference
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: List and retrieve Refunds issued against an Event's registrations. A
+    read-only view of refund records; refunds are initiated against registrations.
+- aid: tito:tito-webhook-endpoints-api
+  name: Tito Webhook Endpoints API
+  tags:
+  - Webhooks
+  - Events
+  - Integrations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  properties:
+  - url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+    type: APIReference
+  - url: https://ti.to/docs/api/admin/3.0#webhooks
+    type: Documentation
+  - url: openapi/tito-openapi.yml
+    type: OpenAPI
+  - url: collections/tito.postman_collection.json
+    type: PostmanCollection
+  - url: collections/tito.opencollection.json
+    type: OpenCollection
+  description: Register, list, retrieve, update, and delete Webhook Endpoints that
+    Tito POSTs event notifications to. Triggers include ticket.created,
+    ticket.completed, ticket.reassigned, ticket.voided, registration.finished,
+    registration.completed, registration.cancelled, checkin.created, and
+    interested_user events. Delivery is outbound HTTP, not a subscription socket.
+common:
+- type: DomainSecurity
+  url: security/tito-domain-security.yml
+- type: Authentication
+  url: authentication/tito-authentication.yml
+- type: GitHubOrganization
+  url: https://github.com/teamtito
+- type: LinkedIn
+  url: https://www.linkedin.com/company/usetito
+- type: Website
+  url: https://ti.to
+- type: Documentation
+  url: https://ti.to/docs/api
+- type: Plans
+  url: plans/tito-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/tito-rate-limits.yml
+- type: FinOps
+  url: finops/tito-finops.yml
+- url: https://blog.tito.io/
+  type: Blog
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,653 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "in": "header",
+        "key": "Authorization",
+        "value": "Token token={{apiToken}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Account", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Confirm authentication.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.tito.io/v3/hello" },
+          "docs": "Confirms the API token is valid and lists accessible accounts."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Events", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all upcoming events.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events",
+            "params": [{ "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." }]
+          },
+          "docs": "Retrieves all upcoming events for the given account."
+        },
+        {
+          "info": { "name": "Get all past events.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events/past",
+            "params": [{ "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." }]
+          },
+          "docs": "Retrieves all past events for the given account."
+        },
+        {
+          "info": { "name": "Get all archived events.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events/archived",
+            "params": [{ "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." }]
+          },
+          "docs": "Retrieves all archived events for the given account."
+        },
+        {
+          "info": { "name": "Get an event.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "Retrieve an event for the given account."
+        },
+        {
+          "info": { "name": "Create an event.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/events",
+            "params": [{ "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." }],
+            "body": { "type": "json", "data": "{\n  \"event\": {\n    \"title\": \"Awesome Conf\"\n  }\n}" }
+          },
+          "docs": "Create a new event belonging to the given account."
+        },
+        {
+          "info": { "name": "Update an event.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"event\": {}\n}" }
+          },
+          "docs": "Update an event belonging to the given account."
+        },
+        {
+          "info": { "name": "Delete an event.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "Delete an event belonging to the given account."
+        },
+        {
+          "info": { "name": "Duplicate an event.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/duplication",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Asynchronously duplicate an existing event."
+        },
+        {
+          "info": { "name": "Get event duplication status.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/duplication",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "The latest status of the event duplication (processing or complete)."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Releases", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all releases.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "Retrieves all releases (ticket types) for the event."
+        },
+        {
+          "info": { "name": "Get a release.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "release_slug", "value": "", "type": "path", "description": "The slug of a Release." }
+            ]
+          },
+          "docs": "Retrieve a single release."
+        },
+        {
+          "info": { "name": "Create a release.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"release\": {\n    \"title\": \"Early Bird\",\n    \"price\": \"99.00\",\n    \"quantity\": 100\n  }\n}" }
+          },
+          "docs": "Create a new release for the event."
+        },
+        {
+          "info": { "name": "Update a release.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "release_slug", "value": "", "type": "path", "description": "The slug of a Release." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"release\": {}\n}" }
+          },
+          "docs": "Update an existing release."
+        },
+        {
+          "info": { "name": "Delete a release.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "release_slug", "value": "", "type": "path", "description": "The slug of a Release." }
+            ]
+          },
+          "docs": "Delete a release."
+        },
+        {
+          "info": { "name": "Put a release on sale.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/activation",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "release_slug", "value": "", "type": "path", "description": "The slug of a Release." }
+            ]
+          },
+          "docs": "Activate a release so it goes on sale."
+        },
+        {
+          "info": { "name": "Pause the sale of a release.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/deactivation",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "release_slug", "value": "", "type": "path", "description": "The slug of a Release." }
+            ]
+          },
+          "docs": "Deactivate a release to pause its sale."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tickets", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all tickets.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets?page[size]=100",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "page[size]", "value": "100", "type": "query", "description": "Page size (default 100, max 1000)." }
+            ]
+          },
+          "docs": "List tickets for an event. Supports search[...] filters and free-text q."
+        },
+        {
+          "info": { "name": "Get a ticket.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "ticket_slug", "value": "", "type": "path", "description": "The slug of a Ticket." }
+            ]
+          },
+          "docs": "Retrieve a single ticket."
+        },
+        {
+          "info": { "name": "Create a ticket.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"ticket\": {}\n}" }
+          },
+          "docs": "Create a ticket."
+        },
+        {
+          "info": { "name": "Update a ticket.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "ticket_slug", "value": "", "type": "path", "description": "The slug of a Ticket." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"ticket\": {}\n}" }
+          },
+          "docs": "Update a ticket."
+        },
+        {
+          "info": { "name": "Reassign a ticket.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/reassignments",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "ticket_slug", "value": "", "type": "path", "description": "The slug of a Ticket." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"reassignment\": {\n    \"email\": \"new@example.com\"\n  }\n}" }
+          },
+          "docs": "Reassign a ticket to a different attendee."
+        },
+        {
+          "info": { "name": "Void a ticket.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/void",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "ticket_slug", "value": "", "type": "path", "description": "The slug of a Ticket." }
+            ]
+          },
+          "docs": "Void a ticket."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Registrations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all registrations.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List registrations. Supports search[...] filters and free-text q."
+        },
+        {
+          "info": { "name": "Get a registration.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "registration_slug", "value": "", "type": "path", "description": "The slug of a Registration." }
+            ]
+          },
+          "docs": "Retrieve a single registration."
+        },
+        {
+          "info": { "name": "Create a registration.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"registration\": {}\n}" }
+          },
+          "docs": "Create a registration."
+        },
+        {
+          "info": { "name": "Mark a registration as paid.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "registration_slug", "value": "", "type": "path", "description": "The slug of a Registration." }
+            ]
+          },
+          "docs": "Confirm a registration as paid."
+        },
+        {
+          "info": { "name": "Mark a registration as unpaid.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "registration_slug", "value": "", "type": "path", "description": "The slug of a Registration." }
+            ]
+          },
+          "docs": "Revert a registration confirmation to unpaid."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Discount Codes", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all discount codes.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/discount_codes",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List discount codes for the event."
+        },
+        {
+          "info": { "name": "Create a discount code.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/discount_codes",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"discount_code\": {\n    \"code\": \"EARLY10\",\n    \"type\": \"percent\",\n    \"value\": 10\n  }\n}" }
+          },
+          "docs": "Create a discount code."
+        },
+        {
+          "info": { "name": "Get a discount code.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "discount_code_id", "value": "", "type": "path", "description": "The id of a Discount Code." }
+            ]
+          },
+          "docs": "Retrieve a single discount code."
+        },
+        {
+          "info": { "name": "Update a discount code.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "discount_code_id", "value": "", "type": "path", "description": "The id of a Discount Code." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"discount_code\": {}\n}" }
+          },
+          "docs": "Update a discount code."
+        },
+        {
+          "info": { "name": "Delete a discount code.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/discount_codes/:discount_code_id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "discount_code_id", "value": "", "type": "path", "description": "The id of a Discount Code." }
+            ]
+          },
+          "docs": "Delete a discount code."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Activities", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all activities.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/activities",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List activities for the event."
+        },
+        {
+          "info": { "name": "Create an activity.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/activities",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"activity\": {\n    \"name\": \"Workshop\",\n    \"capacity\": 50,\n    \"release_ids\": []\n  }\n}" }
+          },
+          "docs": "Create an activity and attach releases via release_ids."
+        },
+        {
+          "info": { "name": "Get an activity.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "activity_id", "value": "", "type": "path", "description": "The id of an Activity." }
+            ]
+          },
+          "docs": "Retrieve a single activity."
+        },
+        {
+          "info": { "name": "Duplicate an activity.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/activities/:activity_id/duplication",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "activity_id", "value": "", "type": "path", "description": "The id of an Activity." }
+            ]
+          },
+          "docs": "Duplicate an activity."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Check-in Lists", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all check-in lists.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List check-in lists for the event."
+        },
+        {
+          "info": { "name": "Create a check-in list.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"checkin_list\": {}\n}" }
+          },
+          "docs": "Create a check-in list."
+        },
+        {
+          "info": { "name": "Get a check-in list.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/checkin_lists/:checkin_list_slug",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "checkin_list_slug", "value": "", "type": "path", "description": "The slug of a Check-in List." }
+            ]
+          },
+          "docs": "Retrieve a single check-in list."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Refunds", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all refunds.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/refunds",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List refunds issued against the event's registrations."
+        },
+        {
+          "info": { "name": "Get a refund.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/refunds/:refund_id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "refund_id", "value": "", "type": "path", "description": "The id of a Refund." }
+            ]
+          },
+          "docs": "Retrieve a single refund."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Webhook Endpoints", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get all webhook endpoints.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ]
+          },
+          "docs": "List webhook endpoints registered for the event."
+        },
+        {
+          "info": { "name": "Create a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"webhook_endpoint\": {\n    \"url\": \"https://example.com/tito-webhook\",\n    \"included_triggers\": [\"ticket.completed\", \"registration.finished\"]\n  }\n}" }
+          },
+          "docs": "Register a webhook endpoint that Tito POSTs event notifications to."
+        },
+        {
+          "info": { "name": "Get a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "id", "value": "", "type": "path", "description": "The id of a Webhook Endpoint." }
+            ]
+          },
+          "docs": "Retrieve a single webhook endpoint."
+        },
+        {
+          "info": { "name": "Update a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "id", "value": "", "type": "path", "description": "The id of a Webhook Endpoint." }
+            ],
+            "body": { "type": "json", "data": "{\n  \"webhook_endpoint\": {}\n}" }
+          },
+          "docs": "Update a webhook endpoint."
+        },
+        {
+          "info": { "name": "Delete a webhook endpoint.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/webhook_endpoints/:id",
+            "params": [
+              { "name": "account_slug", "value": "", "type": "path", "description": "The slug of an Account." },
+              { "name": "event_slug", "value": "", "type": "path", "description": "The slug of an Event." },
+              { "name": "id", "value": "", "type": "path", "description": "The id of a Webhook Endpoint." }
+            ]
+          },
+          "docs": "Delete a webhook endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
