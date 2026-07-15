@@ -223,6 +223,8 @@ apis:
     registration.completed, registration.cancelled, checkin.created, and
     interested_user events. Delivery is outbound HTTP, not a subscription socket.
 common:
+- type: AgenticAccess
+  url: agentic-access/tito-agentic-access.yml
 - type: DomainSecurity
   url: security/tito-domain-security.yml
 - type: Authentication
