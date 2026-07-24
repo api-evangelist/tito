@@ -1,0 +1,213 @@
+openapi: 3.0.3
+info:
+  title: Tito Admin Account Webhook Endpoints API
+  description: 'The Tito Admin API is a REST/JSON interface for secure programmatic access to Tito, an event registration and ticketing platform. It is used to manage accounts, events, releases (ticket types), tickets, registrations, discount codes, activities, check-in lists, refunds, and webhook endpoints. Resources are addressed by their account_slug and event_slug.
+
+    Authentication uses a secret API token generated at https://id.tito.io (api-access-tokens), passed in the Authorization header as `Token token=YOUR-API-TOKEN`, together with an `Accept: application/json` header. Tokens carry a live or test mode.
+
+    NOTE ON FIDELITY: All paths, HTTP methods, path parameters, query filters, and the authentication scheme in this document are grounded in Tito''s official Admin API v3.0 documentation (https://ti.to/docs/api/admin/3.0). Tito does not publish a machine-readable OpenAPI/JSON Schema definition, so the request and response BODY schemas here are modeled from the documented attribute tables and example payloads and are intentionally loosely typed (additionalProperties: true). Treat field-level schemas as a reasonable model, not an exhaustive contract.'
+  version: '3.0'
+  contact:
+    name: Tito (Team Tito)
+    url: https://ti.to
+  license:
+    name: Proprietary
+    url: https://ti.to/terms
+servers:
+- url: https://api.tito.io/v3
+  description: Tito Admin API (production)
+security:
+- titoToken: []
+tags:
+- name: Webhook Endpoints
+  description: Endpoints Tito POSTs event notifications to.
+paths:
+  /{account_slug}/{event_slug}/webhook_endpoints:
+    parameters:
+    - $ref: '#/components/parameters/AccountSlug'
+    - $ref: '#/components/parameters/EventSlug'
+    get:
+      operationId: listWebhookEndpoints
+      tags:
+      - Webhook Endpoints
+      summary: Get all webhook endpoints
+      responses:
+        '200':
+          $ref: '#/components/responses/Collection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createWebhookEndpoint
+      tags:
+      - Webhook Endpoints
+      summary: Create a webhook endpoint
+      requestBody:
+        $ref: '#/components/requestBodies/WebhookEndpointBody'
+      responses:
+        '201':
+          $ref: '#/components/responses/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /{account_slug}/{event_slug}/webhook_endpoints/{id}:
+    parameters:
+    - $ref: '#/components/parameters/AccountSlug'
+    - $ref: '#/components/parameters/EventSlug'
+    - $ref: '#/components/parameters/WebhookEndpointId'
+    get:
+      operationId: getWebhookEndpoint
+      tags:
+      - Webhook Endpoints
+      summary: Get a webhook endpoint
+      responses:
+        '200':
+          $ref: '#/components/responses/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateWebhookEndpoint
+      tags:
+      - Webhook Endpoints
+      summary: Update a webhook endpoint
+      requestBody:
+        $ref: '#/components/requestBodies/WebhookEndpointBody'
+      responses:
+        '200':
+          $ref: '#/components/responses/Resource'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteWebhookEndpoint
+      tags:
+      - Webhook Endpoints
+      summary: Delete a webhook endpoint
+      responses:
+        '204':
+          description: Webhook endpoint deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  requestBodies:
+    WebhookEndpointBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              webhook_endpoint:
+                type: object
+                description: Webhook endpoint attributes (modeled). Typically includes a target url and the set of triggers to subscribe to.
+                properties:
+                  url:
+                    type: string
+                    format: uri
+                  included_triggers:
+                    type: array
+                    items:
+                      type: string
+                additionalProperties: true
+  parameters:
+    WebhookEndpointId:
+      name: id
+      in: path
+      required: true
+      description: The id of a Webhook Endpoint.
+      schema:
+        type: string
+    AccountSlug:
+      name: account_slug
+      in: path
+      required: true
+      description: The slug attribute of an Account.
+      schema:
+        type: string
+    EventSlug:
+      name: event_slug
+      in: path
+      required: true
+      description: The slug attribute of an Event.
+      schema:
+        type: string
+  responses:
+    Resource:
+      description: A single resource. Body schema is modeled and loosely typed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Generic'
+    Collection:
+      description: A paginated collection. Pagination metadata is returned in a meta object (current_page, next_page, prev_page, total_pages, total_count, per_page, overall_total). Use page[number] and page[size] query parameters (default page size 100, maximum 1000).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            additionalProperties: true
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+      additionalProperties: true
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type: integer
+          nullable: true
+        prev_page:
+          type: integer
+          nullable: true
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+        overall_total:
+          type: integer
+    Generic:
+      type: object
+      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
+      additionalProperties: true
+  securitySchemes:
+    titoToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API token generated at https://id.tito.io/api-access-tokens, sent as `Authorization: Token token=YOUR-API-TOKEN`. Requests must also send `Accept: application/json`. Tokens carry a live or test mode.'
