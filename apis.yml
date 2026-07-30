@@ -11,7 +11,20 @@ description: Tito (ti.to) is an event registration and ticketing platform from T
   authenticated with a secret API token. Tito also emits outbound webhooks for ticket,
   registration, check-in, and interested-user events, and exposes a separate
   unauthenticated Check-in API.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tito.png
 tags:
 - Event Ticketing
 - Events
@@ -26,202 +39,366 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: tito:tito-events-api
-  name: Tito Events API
-  tags:
-  - Events
-  - Event Management
-  - Conferences
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: tito:tito-account-api
+  name: Tito Account API
+  description: Authentication check and account discovery.
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
-  properties:
-  - url: https://ti.to/docs/api/admin/3.0
-    type: Documentation
-  - url: https://ti.to/docs/api/admin/3.0#events
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Create, list (upcoming, past, archived), retrieve, update, delete, and
-    duplicate Events under an Account. An Event is addressed by its account_slug and
-    event_slug and is the parent of releases, tickets, registrations, and most other
-    resources.
-- aid: tito:tito-releases-api
-  name: Tito Releases API
   tags:
-  - Releases
-  - Ticket Types
-  - Inventory
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://ti.to/docs/api/admin/3.0
-  baseURL: https://api.tito.io/v3
+  - Account
   properties:
-  - url: https://ti.to/docs/api/admin/3.0#releases
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Manage Releases - the ticket types sold for an Event. Create, retrieve,
-    update, delete, and duplicate releases, put them on sale or pause them
-    (activation/deactivation), archive/unarchive them, and toggle public/secret
-    visibility (publication).
-- aid: tito:tito-tickets-api
-  name: Tito Tickets API
-  tags:
-  - Tickets
-  - Attendees
-  - Ticketing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://ti.to/docs/api/admin/3.0
-  baseURL: https://api.tito.io/v3
-  properties:
-  - url: https://ti.to/docs/api/admin/3.0#tickets
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: List, filter (by state, type, release, activity, dates, and free-text
-    q), retrieve, create, and update Tickets, reassign a ticket to a different
-    attendee, and void or unvoid tickets. Each ticket belongs to an Event and a
-    Registration.
-- aid: tito:tito-registrations-api
-  name: Tito Registrations API
-  tags:
-  - Registrations
-  - Orders
-  - Attendees
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://ti.to/docs/api/admin/3.0
-  baseURL: https://api.tito.io/v3
-  properties:
-  - url: https://ti.to/docs/api/admin/3.0#registrations
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Manage Registrations - the orders that group one or more tickets. List,
-    filter, retrieve, create, and update registrations, and mark a registration as
-    paid or unpaid via the confirmations endpoint.
-- aid: tito:tito-discount-codes-api
-  name: Tito Discount Codes API
-  tags:
-  - Discount Codes
-  - Promotions
-  - Pricing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://ti.to/docs/api/admin/3.0
-  baseURL: https://api.tito.io/v3
-  properties:
-  - url: https://ti.to/docs/api/admin/3.0#discount-codes
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Create, list, retrieve, update, and delete Discount Codes that apply
-    percentage or fixed discounts to an Event's releases at checkout.
+  - type: OpenAPI
+    url: openapi/tito-account-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
 - aid: tito:tito-activities-api
   name: Tito Activities API
+  description: Capacity-bound sessions releases can attach to.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
   tags:
   - Activities
-  - Sessions
-  - Capacity
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://ti.to/docs/api/admin/3.0
-  baseURL: https://api.tito.io/v3
   properties:
-  - url: https://ti.to/docs/api/admin/3.0#activities
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Manage Activities - capacity-bound sessions (for example workshops or
-    tracks) that releases can be attached to via release_ids. Create, list, retrieve,
-    update, delete, and duplicate activities.
+  - type: OpenAPI
+    url: openapi/tito-activities-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
 - aid: tito:tito-check-in-lists-api
   name: Tito Check-in Lists API
-  tags:
-  - Check-in
-  - Attendees
-  - Access Control
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Lists defining which tickets can be checked in.
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
+  tags:
+  - Check-in Lists
   properties:
-  - url: https://ti.to/docs/api/admin/3.0#check-in-lists
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Create, list, retrieve, update, and delete Check-in Lists for an Event.
-    Check-in Lists define which tickets can be checked in and are consumed at the
-    door by Tito's separate Check-in API and mobile/web check-in apps.
+  - type: OpenAPI
+    url: openapi/tito-check-in-lists-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-discount-codes-api
+  name: Tito Discount Codes API
+  description: Percentage or fixed discounts applied at checkout.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  tags:
+  - Discount Codes
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-discount-codes-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-events-api
+  name: Tito Events API
+  description: Events that tickets are sold for.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-events-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
 - aid: tito:tito-refunds-api
   name: Tito Refunds API
+  description: Refund records against registrations.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
   tags:
   - Refunds
-  - Payments
-  - Finance
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-refunds-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-registrations-api
+  name: Tito Registrations API
+  description: Orders that group one or more tickets.
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
+  tags:
+  - Registrations
   properties:
-  - url: https://ti.to/docs/api/admin/3.0#refunds
-    type: APIReference
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: List and retrieve Refunds issued against an Event's registrations. A
-    read-only view of refund records; refunds are initiated against registrations.
+  - type: OpenAPI
+    url: openapi/tito-registrations-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-releases-api
+  name: Tito Releases API
+  description: Ticket types (releases) for an event.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  tags:
+  - Releases
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-releases-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-tickets-api
+  name: Tito Tickets API
+  description: Individual tickets held by attendees.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  tags:
+  - Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
 - aid: tito:tito-webhook-endpoints-api
   name: Tito Webhook Endpoints API
-  tags:
-  - Webhooks
-  - Events
-  - Integrations
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Endpoints Tito POSTs event notifications to.
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
+  tags:
+  - Webhook Endpoints
   properties:
-  - url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
-    type: APIReference
-  - url: https://ti.to/docs/api/admin/3.0#webhooks
-    type: Documentation
-  - url: openapi/tito-openapi.yml
-    type: OpenAPI
-  - url: collections/tito.postman_collection.json
-    type: PostmanCollection
-  - url: collections/tito.opencollection.json
-    type: OpenCollection
-  description: Register, list, retrieve, update, and delete Webhook Endpoints that
-    Tito POSTs event notifications to. Triggers include ticket.created,
-    ticket.completed, ticket.reassigned, ticket.voided, registration.finished,
-    registration.completed, registration.cancelled, checkin.created, and
-    interested_user events. Delivery is outbound HTTP, not a subscription socket.
+  - type: OpenAPI
+    url: openapi/tito-webhook-endpoints-api-openapi.yml
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#events
+  - type: PostmanCollection
+    url: collections/tito.postman_collection.json
+  - type: OpenCollection
+    url: collections/tito.opencollection.json
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#releases
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#tickets
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#registrations
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#discount-codes
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#activities
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#check-in-lists
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#refunds
+  - type: APIReference
+    url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
+  - type: Documentation
+    url: https://ti.to/docs/api/admin/3.0#webhooks
 common:
 - type: AgenticAccess
   url: agentic-access/tito-agentic-access.yml
