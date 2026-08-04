@@ -1,0 +1,21 @@
+{
+  "repo": "tito",
+  "feeds": [
+    {
+      "source": "https://blog.tito.io/posts.rss",
+      "feed_url": "https://blog.tito.io/posts.rss",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://blog.tito.io/",
+      "feed_url": "https://blog.tito.io/posts.rss",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 20,
+  "fetched": "2026-08-01T15:49:00Z"
+}

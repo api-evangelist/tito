@@ -1,0 +1,32 @@
+{
+  "provider": "tito",
+  "sources": [
+    "tito-account-api-openapi.yml",
+    "tito-activities-api-openapi.yml",
+    "tito-check-in-lists-api-openapi.yml",
+    "tito-discount-codes-api-openapi.yml",
+    "tito-events-api-openapi.yml",
+    "tito-refunds-api-openapi.yml",
+    "tito-registrations-api-openapi.yml",
+    "tito-releases-api-openapi.yml",
+    "tito-tickets-api-openapi.yml",
+    "tito-webhook-endpoints-api-openapi.yml"
+  ],
+  "outputs": [
+    "tito-account-api-openapi.yml",
+    "tito-activities-api-openapi.yml",
+    "tito-check-in-lists-api-openapi.yml",
+    "tito-discount-codes-api-openapi.yml",
+    "tito-events-api-openapi.yml",
+    "tito-refunds-api-openapi.yml",
+    "tito-registrations-api-openapi.yml",
+    "tito-releases-api-openapi.yml",
+    "tito-tickets-api-openapi.yml",
+    "tito-webhook-endpoints-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
