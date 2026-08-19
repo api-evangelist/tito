@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin Account Refunds API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/refunds",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Get all refunds"
+        },
+        {
+          "info": {
+            "name": "Get a refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/refunds/:refund_id",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "refund_id",
+                "value": "",
+                "type": "path",
+                "description": "The id of a Refund."
+              }
+            ]
+          },
+          "docs": "Get a refund"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

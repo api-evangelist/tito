@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin Account Releases API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Releases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all releases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Get all releases"
+        },
+        {
+          "info": {
+            "name": "Create a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a release"
+        },
+        {
+          "info": {
+            "name": "Get a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Get a release"
+        },
+        {
+          "info": {
+            "name": "Update a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a release"
+        },
+        {
+          "info": {
+            "name": "Delete a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Delete a release"
+        },
+        {
+          "info": {
+            "name": "Archive a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/archival",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Archive a release"
+        },
+        {
+          "info": {
+            "name": "Unarchive a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/archival",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Unarchive a release"
+        },
+        {
+          "info": {
+            "name": "Duplicate a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/duplication",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Duplicate a release"
+        },
+        {
+          "info": {
+            "name": "Put a release on sale",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/activation",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Put a release on sale"
+        },
+        {
+          "info": {
+            "name": "Pause the sale of a release",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/deactivation",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Pause the sale of a release"
+        },
+        {
+          "info": {
+            "name": "Make a release public",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/publication",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Make a release public"
+        },
+        {
+          "info": {
+            "name": "Make a release secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/releases/:release_slug/publication",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "release_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Release."
+              }
+            ]
+          },
+          "docs": "Make a release secret"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

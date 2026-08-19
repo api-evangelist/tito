@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin Account Events API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all upcoming events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              }
+            ]
+          },
+          "docs": "Retrieves all upcoming events for the given account."
+        },
+        {
+          "info": {
+            "name": "Create an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/events",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new event belonging to the given account."
+        },
+        {
+          "info": {
+            "name": "Get all past events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events/past",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              }
+            ]
+          },
+          "docs": "Get all past events"
+        },
+        {
+          "info": {
+            "name": "Get all archived events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/events/archived",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              }
+            ]
+          },
+          "docs": "Get all archived events"
+        },
+        {
+          "info": {
+            "name": "Get an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Get an event"
+        },
+        {
+          "info": {
+            "name": "Update an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an event"
+        },
+        {
+          "info": {
+            "name": "Delete an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Delete an event"
+        },
+        {
+          "info": {
+            "name": "Get event duplication status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/duplication",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Returns the latest status (processing or complete) of an event duplication."
+        },
+        {
+          "info": {
+            "name": "Duplicate an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/duplication",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ]
+          },
+          "docs": "Asynchronously duplicates an event. Poll with GET to check status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

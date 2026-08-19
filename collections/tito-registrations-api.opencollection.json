@@ -1,0 +1,214 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin Account Registrations API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all registrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search across registrations."
+              }
+            ]
+          },
+          "docs": "Lists registrations for an event. Supports search filters such as search[states][], search[created_at][gt], search[updated_at][gt], search[sort], search[direction], and free-text q."
+        },
+        {
+          "info": {
+            "name": "Create a registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a registration"
+        },
+        {
+          "info": {
+            "name": "Get a registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "registration_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Registration."
+              }
+            ]
+          },
+          "docs": "Get a registration"
+        },
+        {
+          "info": {
+            "name": "Update a registration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "registration_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Registration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a registration"
+        },
+        {
+          "info": {
+            "name": "Mark a registration as paid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "registration_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Registration."
+              }
+            ]
+          },
+          "docs": "Mark a registration as paid"
+        },
+        {
+          "info": {
+            "name": "Mark a registration as unpaid",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/registrations/:registration_slug/confirmations",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "registration_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Registration."
+              }
+            ]
+          },
+          "docs": "Mark a registration as unpaid"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

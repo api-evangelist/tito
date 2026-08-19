@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tito Admin Account Tickets API",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search across ticket holders."
+              }
+            ]
+          },
+          "docs": "Lists tickets for an event. Supports filtering via search parameters - e.g. search[states][], search[types][], search[release_ids][], search[activity_ids][], search[created_at][gt], search[updated_at][gt], search[sort], search[direction] - and free-text search via q."
+        },
+        {
+          "info": {
+            "name": "Create a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a ticket"
+        },
+        {
+          "info": {
+            "name": "Get a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "ticket_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Ticket."
+              }
+            ]
+          },
+          "docs": "Get a ticket"
+        },
+        {
+          "info": {
+            "name": "Update a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "ticket_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Ticket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a ticket"
+        },
+        {
+          "info": {
+            "name": "Reassign a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/reassignments",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "ticket_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Ticket."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reassigns a ticket to a different attendee."
+        },
+        {
+          "info": {
+            "name": "Void a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.tito.io/v3/:account_slug/:event_slug/tickets/:ticket_slug/void",
+            "params": [
+              {
+                "name": "account_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Account."
+              },
+              {
+                "name": "event_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of an Event."
+              },
+              {
+                "name": "ticket_slug",
+                "value": "",
+                "type": "path",
+                "description": "The slug attribute of a Ticket."
+              }
+            ]
+          },
+          "docs": "Void a ticket"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
