@@ -27,6 +27,16 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tito.png
 tags:
 - Event Ticketing
+- Event
+- Registration
+- Ticketing
+- Conferences
+- Event Management
+- Attendees
+- Webhook
+- Software-as-a-Service
+tags_raw:
+- Event Ticketing
 - Events
 - Registration
 - Ticketing
@@ -189,6 +199,8 @@ apis:
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
