@@ -11,6 +11,18 @@ description: Tito (ti.to) is an event registration and ticketing platform from T
   authenticated with a secret API token. Tito also emits outbound webhooks for ticket,
   registration, check-in, and interested-user events, and exposes a separate
   unauthenticated Check-in API.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
