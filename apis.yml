@@ -423,6 +423,16 @@ apis:
     url: https://ti.to/docs/api/admin/3.0#webhook-endpoints
   - type: Documentation
     url: https://ti.to/docs/api/admin/3.0#webhooks
+- aid: tito:tito-tito-admin-api-api
+  name: Tito Tito Admin API
+  description: The Tito Admin API API from Tito — 0 operation(s) for tito admin api.
+  humanURL: https://ti.to/docs/api/admin/3.0
+  baseURL: https://api.tito.io/v3
+  tags:
+  - Tito Admin API
+  properties:
+  - type: OpenAPI
+    url: openapi/tito-tito-admin-api-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/tito-agentic-access.yml

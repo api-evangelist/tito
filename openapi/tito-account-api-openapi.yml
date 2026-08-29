@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Tito Admin Account API
   description: 'The Tito Admin API is a REST/JSON interface for secure programmatic access to Tito, an event registration and ticketing platform. It is used to manage accounts, events, releases (ticket types), tickets, registrations, discount codes, activities, check-in lists, refunds, and webhook endpoints. Resources are addressed by their account_slug and event_slug.
@@ -54,6 +54,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid API token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -65,13 +72,6 @@ components:
           items:
             type: string
       additionalProperties: true
-  responses:
-    Unauthorized:
-      description: Missing or invalid API token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     titoToken:
       type: apiKey

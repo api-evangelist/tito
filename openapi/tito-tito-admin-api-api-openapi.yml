@@ -1,0 +1,96 @@
+openapi: 3.2.0
+info:
+  title: Tito Admin API
+  description: 'The Tito Admin API is a REST/JSON interface for secure programmatic access to Tito, an event registration and ticketing platform. It is used to manage accounts, events, releases (ticket types), tickets, registrations, discount codes, activities, check-in lists, refunds, and webhook endpoints. Resources are addressed by their account_slug and event_slug.
+
+    Authentication uses a secret API token generated at https://id.tito.io (api-access-tokens), passed in the Authorization header as `Token token=YOUR-API-TOKEN`, together with an `Accept: application/json` header. Tokens carry a live or test mode.
+
+    NOTE ON FIDELITY: All paths, HTTP methods, path parameters, query filters, and the authentication scheme in this document are grounded in Tito''s official Admin API v3.0 documentation (https://ti.to/docs/api/admin/3.0). Tito does not publish a machine-readable OpenAPI/JSON Schema definition, so the request and response BODY schemas here are modeled from the documented attribute tables and example payloads and are intentionally loosely typed (additionalProperties: true). Treat field-level schemas as a reasonable model, not an exhaustive contract.'
+  version: '3.0'
+  contact:
+    name: Tito (Team Tito)
+    url: https://ti.to
+  license:
+    name: Proprietary
+    url: https://ti.to/terms
+servers:
+- url: https://api.tito.io/v3
+  description: Tito Admin API (production)
+security:
+- titoToken: []
+tags:
+- name: Tito Admin API
+paths: {}
+webhooks:
+  ticketEvent:
+    post:
+      operationId: ticketWebhook
+      summary: Ticket lifecycle webhook
+      description: Tito POSTs a JSON payload to your registered webhook endpoint when a ticket event occurs. Triggers include ticket.created, ticket.completed, ticket.reassigned, ticket.updated, ticket.unsnoozed, ticket.unvoided, and ticket.voided. This is outbound HTTP delivery, not a WebSocket.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Generic'
+      responses:
+        '200':
+          description: Acknowledged by your endpoint.
+      tags:
+      - Tito Admin API
+  registrationEvent:
+    post:
+      operationId: registrationWebhook
+      summary: Registration lifecycle webhook
+      description: Tito POSTs a JSON payload when a registration event occurs. Triggers include registration.updated, registration.finished, registration.completed, and registration.cancelled.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Generic'
+      responses:
+        '200':
+          description: Acknowledged by your endpoint.
+      tags:
+      - Tito Admin API
+  checkinEvent:
+    post:
+      operationId: checkinWebhook
+      summary: Check-in webhook
+      description: Tito POSTs a payload when an attendee is checked in (checkin.created).
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Generic'
+      responses:
+        '200':
+          description: Acknowledged by your endpoint.
+      tags:
+      - Tito Admin API
+  interestedUserEvent:
+    post:
+      operationId: interestedUserWebhook
+      summary: Interested-user webhook
+      description: Tito POSTs a payload on interested_user.created, interested_user.updated, and interested_user.deleted.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Generic'
+      responses:
+        '200':
+          description: Acknowledged by your endpoint.
+      tags:
+      - Tito Admin API
+components:
+  schemas:
+    Generic:
+      type: object
+      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
+      additionalProperties: true
+  securitySchemes:
+    titoToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: 'Secret API token generated at https://id.tito.io/api-access-tokens, sent as `Authorization: Token token=YOUR-API-TOKEN`. Requests must also send `Accept: application/json`. Tokens carry a live or test mode.'

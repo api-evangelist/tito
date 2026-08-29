@@ -1,16 +1,7 @@
 {
   "provider": "tito",
   "sources": [
-    "tito-account-api-openapi.yml",
-    "tito-activities-api-openapi.yml",
-    "tito-check-in-lists-api-openapi.yml",
-    "tito-discount-codes-api-openapi.yml",
-    "tito-events-api-openapi.yml",
-    "tito-refunds-api-openapi.yml",
-    "tito-registrations-api-openapi.yml",
-    "tito-releases-api-openapi.yml",
-    "tito-tickets-api-openapi.yml",
-    "tito-webhook-endpoints-api-openapi.yml"
+    "_original/tito-openapi.yml"
   ],
   "outputs": [
     "tito-account-api-openapi.yml",
@@ -22,11 +13,31 @@
     "tito-registrations-api-openapi.yml",
     "tito-releases-api-openapi.yml",
     "tito-tickets-api-openapi.yml",
+    "tito-tito-admin-api-api-openapi.yml",
     "tito-webhook-endpoints-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tito-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "tito-openapi.yml: tagged webhooks POST ticketEvent -> Tito Admin API",
+    "tito-openapi.yml: tagged webhooks POST registrationEvent -> Tito Admin API",
+    "tito-openapi.yml: tagged webhooks POST checkinEvent -> Tito Admin API",
+    "tito-openapi.yml: tagged webhooks POST interestedUserEvent -> Tito Admin API",
+    "tito-openapi.yml: declared missing tag: Tito Admin API"
+  ],
+  "skipped": [
+    "tito-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-activities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-check-in-lists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-discount-codes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-registrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-webhook-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
