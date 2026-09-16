@@ -2,15 +2,13 @@ aid: tito
 url: https://raw.githubusercontent.com/api-evangelist/tito/refs/heads/main/apis.yml
 name: Tito
 kind: company
-description: Tito (ti.to) is an event registration and ticketing platform from Team
-  Tito in Dublin, Ireland, used to sell tickets, collect registrations, and check in
-  attendees for conferences and events. Organizers can sell through Tito-hosted event
-  pages or an embeddable widget. The Admin API is a REST/JSON interface at
-  https://api.tito.io/v3 for managing accounts, events, releases (ticket types),
-  tickets, registrations, discount codes, activities, check-in lists, and refunds,
-  authenticated with a secret API token. Tito also emits outbound webhooks for ticket,
-  registration, check-in, and interested-user events, and exposes a separate
-  unauthenticated Check-in API.
+description: Tito (ti.to) is an event registration and ticketing platform from Team Tito in Dublin, Ireland,
+  used to sell tickets, collect registrations, and check in attendees for conferences and events. Organizers
+  can sell through Tito-hosted event pages or an embeddable widget. The Admin API is a REST/JSON interface
+  at https://api.tito.io/v3 for managing accounts, events, releases (ticket types), tickets, registrations,
+  discount codes, activities, check-in lists, and refunds, authenticated with a secret API token. Tito
+  also emits outbound webhooks for ticket, registration, check-in, and interested-user events, and exposes
+  a separate unauthenticated Check-in API.
 deliveryModel:
   model: saas
   open_source: false
@@ -59,7 +57,7 @@ tags_raw:
 - Webhooks
 - SaaS
 created: '2026-07-12'
-modified: '2026-07-12'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: tito:tito-account-api
@@ -425,7 +423,7 @@ apis:
   - type: Documentation
     url: https://ti.to/docs/api/admin/3.0#webhooks
 - aid: tito:tito-tito-admin-api-api
-  name: Tito Tito Admin API
+  name: Tito Admin API
   description: The Tito Admin API API from Tito — 0 operation(s) for tito admin api.
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
