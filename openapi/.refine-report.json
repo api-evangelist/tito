@@ -26,7 +26,8 @@
     "tito-openapi.yml: tagged webhooks POST registrationEvent -> Tito Admin API",
     "tito-openapi.yml: tagged webhooks POST checkinEvent -> Tito Admin API",
     "tito-openapi.yml: tagged webhooks POST interestedUserEvent -> Tito Admin API",
-    "tito-openapi.yml: declared missing tag: Tito Admin API"
+    "tito-openapi.yml: declared missing tag: Tito Admin API",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "tito-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -38,6 +39,7 @@
     "tito-registrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tito-releases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tito-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tito-tito-admin-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "tito-webhook-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }
