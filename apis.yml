@@ -356,6 +356,8 @@ apis:
   humanURL: https://ti.to/docs/api/admin/3.0
   baseURL: https://api.tito.io/v3
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI

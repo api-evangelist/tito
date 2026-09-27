@@ -50,42 +50,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-        errors:
-          type: array
-          items:
-            type: string
-      additionalProperties: true
-    Generic:
-      type: object
-      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
-      additionalProperties: true
-    PaginationMeta:
-      type: object
-      properties:
-        current_page:
-          type: integer
-        next_page:
-          type:
-          - integer
-          - 'null'
-        prev_page:
-          type:
-          - integer
-          - 'null'
-        total_pages:
-          type: integer
-        total_count:
-          type: integer
-        per_page:
-          type: integer
-        overall_total:
-          type: integer
   parameters:
     RefundId:
       name: refund_id
@@ -119,24 +83,60 @@ components:
               meta:
                 $ref: '#/components/schemas/PaginationMeta'
             additionalProperties: true
-    Resource:
-      description: A single resource. Body schema is modeled and loosely typed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Generic'
     Unauthorized:
       description: Missing or invalid API token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Resource:
+      description: A single resource. Body schema is modeled and loosely typed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Generic'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        current_page:
+          type: integer
+        next_page:
+          type:
+          - integer
+          - 'null'
+        prev_page:
+          type:
+          - integer
+          - 'null'
+        total_pages:
+          type: integer
+        total_count:
+          type: integer
+        per_page:
+          type: integer
+        overall_total:
+          type: integer
+    Generic:
+      type: object
+      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
+      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+      additionalProperties: true
   securitySchemes:
     titoToken:
       type: apiKey
