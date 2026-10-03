@@ -90,7 +90,35 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    DiscountCodeId:
+      name: discount_code_id
+      in: path
+      required: true
+      description: The id of a Discount Code.
+      schema:
+        type: string
+    EventSlug:
+      name: event_slug
+      in: path
+      required: true
+      description: The slug attribute of an Event.
+      schema:
+        type: string
+    AccountSlug:
+      name: account_slug
+      in: path
+      required: true
+      description: The slug attribute of an Account.
+      schema:
+        type: string
   responses:
+    ValidationError:
+      description: The request payload failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Collection:
       description: A paginated collection. Pagination metadata is returned in a meta object (current_page, next_page, prev_page, total_pages, total_count, per_page, overall_total). Use page[number] and page[size] query parameters (default page size 100, maximum 1000).
       content:
@@ -101,8 +129,8 @@ components:
               meta:
                 $ref: '#/components/schemas/PaginationMeta'
             additionalProperties: true
-    Unauthorized:
-      description: Missing or invalid API token.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -113,47 +141,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Generic'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid API token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    DiscountCodeId:
-      name: discount_code_id
-      in: path
-      required: true
-      description: The id of a Discount Code.
-      schema:
-        type: string
-    AccountSlug:
-      name: account_slug
-      in: path
-      required: true
-      description: The slug attribute of an Account.
-      schema:
-        type: string
-    EventSlug:
-      name: event_slug
-      in: path
-      required: true
-      description: The slug attribute of an Event.
-      schema:
-        type: string
-  requestBodies:
-    GenericBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Generic'
   schemas:
     PaginationMeta:
       type: object
@@ -190,6 +183,13 @@ components:
           items:
             type: string
       additionalProperties: true
+  requestBodies:
+    GenericBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Generic'
   securitySchemes:
     titoToken:
       type: apiKey
