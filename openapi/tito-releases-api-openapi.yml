@@ -186,13 +186,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    ReleaseSlug:
-      name: release_slug
-      in: path
-      required: true
-      description: The slug attribute of a Release.
-      schema:
-        type: string
     EventSlug:
       name: event_slug
       in: path
@@ -207,25 +200,16 @@ components:
       description: The slug attribute of an Account.
       schema:
         type: string
+    ReleaseSlug:
+      name: release_slug
+      in: path
+      required: true
+      description: The slug attribute of a Release.
+      schema:
+        type: string
   responses:
     ValidationError:
       description: The request payload failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Collection:
-      description: A paginated collection. Pagination metadata is returned in a meta object (current_page, next_page, prev_page, total_pages, total_count, per_page, overall_total). Use page[number] and page[size] query parameters (default page size 100, maximum 1000).
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              meta:
-                $ref: '#/components/schemas/PaginationMeta'
-            additionalProperties: true
-    NotFound:
-      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -236,13 +220,33 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Generic'
+    Collection:
+      description: A paginated collection. Pagination metadata is returned in a meta object (current_page, next_page, prev_page, total_pages, total_count, per_page, overall_total). Use page[number] and page[size] query parameters (default page size 100, maximum 1000).
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              meta:
+                $ref: '#/components/schemas/PaginationMeta'
+            additionalProperties: true
     Unauthorized:
       description: Missing or invalid API token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Generic:
+      type: object
+      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
+      additionalProperties: true
     PaginationMeta:
       type: object
       properties:
@@ -264,10 +268,6 @@ components:
           type: integer
         overall_total:
           type: integer
-    Generic:
-      type: object
-      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
-      additionalProperties: true
     Error:
       type: object
       properties:

@@ -148,6 +148,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Resource:
+      description: A single resource. Body schema is modeled and loosely typed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Generic'
     Collection:
       description: A paginated collection. Pagination metadata is returned in a meta object (current_page, next_page, prev_page, total_pages, total_count, per_page, overall_total). Use page[number] and page[size] query parameters (default page size 100, maximum 1000).
       content:
@@ -158,25 +164,23 @@ components:
               meta:
                 $ref: '#/components/schemas/PaginationMeta'
             additionalProperties: true
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Resource:
-      description: A single resource. Body schema is modeled and loosely typed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Generic'
     Unauthorized:
       description: Missing or invalid API token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Generic:
+      type: object
+      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
+      additionalProperties: true
     PaginationMeta:
       type: object
       properties:
@@ -198,10 +202,6 @@ components:
           type: integer
         overall_total:
           type: integer
-    Generic:
-      type: object
-      description: Loosely-typed object modeled from Tito's documented attribute tables and example payloads. Field-level structure is not exhaustively specified.
-      additionalProperties: true
     Error:
       type: object
       properties:
